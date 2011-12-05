@@ -1,0 +1,12 @@
+diff -ur -x .deps rng-tools-2.orig/rngd.c rng-tools-2/rngd.c
+--- rng-tools-2.orig/rngd.c	2010-05-28 15:36:00.037429967 +0100
++++ rng-tools-2/rngd.c	2010-05-28 15:36:18.000000000 +0100
+@@ -215,7 +215,7 @@
+ 		for (iter = rng_list; iter; iter = iter->next)
+ 		{
+ 			retval = iter->xread(buf, sizeof buf, iter);
+-			if (retval > 0)
++			if (retval == 0)
+ 				update_kernel_random(random_step,
+ 						     poll_timeout, buf,
+ 						     iter->fipsctx);

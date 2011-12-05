@@ -1,0 +1,20 @@
+--- rng-tools-2/rngd.c.foo	2004-08-19 00:53:35.636969879 -0400
++++ rng-tools-2/rngd.c	2004-08-19 00:53:49.946252542 -0400
+@@ -67,7 +67,7 @@
+ 	  "Kernel device used for random number output (default: /dev/random)" },
+ 
+ 	{ "rng-device", 'r', "file", 0,
+-	  "Kernel device used for random number input (default: /dev/hwrandom)" },
++	  "Kernel device used for random number input (default: /dev/hw_random)" },
+ 
+ 	{ "random-step", 's', "nnn", 0,
+ 	  "Number of bytes written to random-device at a time (default: 64)" },
+@@ -89,7 +89,7 @@
+ };
+ 
+ static struct arguments default_arguments = {
+-	.rng_name	= "/dev/hwrandom",
++	.rng_name	= "/dev/hw_random",
+ 	.random_name	= "/dev/random",
+ 	.poll_timeout	= 60,
+ 	.random_step	= 64,

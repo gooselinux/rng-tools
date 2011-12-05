@@ -1,0 +1,43 @@
+diff -ur -x .deps rng-tools-2.orig/rngd_entsource.c rng-tools-2/rngd_entsource.c
+--- rng-tools-2.orig/rngd_entsource.c	2010-05-28 15:15:31.369305138 +0100
++++ rng-tools-2/rngd_entsource.c	2010-05-28 15:17:18.000000000 +0100
+@@ -170,7 +170,7 @@
+ 	if (ent_src->rng_fd == -1) {
+ 		return 1;
+ 	}
+-	list_add(&ent_src);
++	list_add(ent_src);
+ 	/* Bootstrap FIPS tests */
+ 	ent_src->fipsctx = malloc(sizeof(fips_ctx_t));
+ 	fips_init(ent_src->fipsctx, discard_initial_data(ent_src));
+@@ -186,7 +186,7 @@
+ 	if (ent_src->rng_fd == -1) {
+ 		return 1;
+ 	}
+-	list_add(&ent_src);
++	list_add(ent_src);
+ 	/* Bootstrap FIPS tests */
+ 	ent_src->fipsctx = malloc(sizeof(fips_ctx_t));
+ 	fips_init(ent_src->fipsctx, 0);
+diff -ur -x .deps rng-tools-2.orig/rngd.h rng-tools-2/rngd.h
+--- rng-tools-2.orig/rngd.h	2010-05-28 15:15:31.368305278 +0100
++++ rng-tools-2/rngd.h	2010-05-28 15:18:00.000000000 +0100
+@@ -72,5 +72,6 @@
+ 	} \
+ } while (0)
+ 
++extern void list_add(struct rng *ent_src);
+ #endif /* RNGD__H */
+ 
+diff -ur -x .deps rng-tools-2.orig/rngd_linux.c rng-tools-2/rngd_linux.c
+--- rng-tools-2.orig/rngd_linux.c	2010-05-28 15:15:31.370305092 +0100
++++ rng-tools-2/rngd_linux.c	2010-05-28 15:17:40.000000000 +0100
+@@ -104,7 +104,7 @@
+ 	poll(&pfd, 1, 1000.0 * poll_timeout);
+ }
+ 
+-int list_add(struct rng *ent_src)
++void list_add(struct rng *ent_src)
+ {
+ 	if (rng_list) {
+ 		struct rng *iter;
